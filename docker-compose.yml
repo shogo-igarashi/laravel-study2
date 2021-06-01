@@ -5,7 +5,7 @@ services:
   # Host===================================================================
   nginx:
     image: nginx:1.12
-    container_name: nginx
+    container_name: nginx2
     ports:
       - 80:80
     volumes:
@@ -15,7 +15,7 @@ services:
 
   # App===================================================================
   app:
-    container_name: app
+    container_name: app2
     build: docker/app
     volumes:
       - ./app/:/var/www/html/
@@ -24,7 +24,7 @@ services:
   # NPM===================================================================
   node:
     image: node:lts
-    container_name: node
+    container_name: node2
     volumes:
       - ./app/:/var/www/html/
 #      - node:/var/www/html/node_modules ここもwindows特有のエラー対策
@@ -35,7 +35,7 @@ services:
   # Database===================================================================
   db:
     image: mysql:8.0
-    container_name: db
+    container_name: db2
     environment:
       MYSQL_DATABASE: 'laravel-database'
       MYSQL_USER: 'mysql'
