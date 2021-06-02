@@ -64,11 +64,39 @@ class ContactFormController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $contact = ContactForm::find($id);
+
+        if($contact->gender === 0){
+            $gender = '男性';
+        }
+
+        if($contact->gender === 1){
+            $gender = '女性';
+        }
+        if($contact->age === 1){
+            $age = '〜19歳';
+        }
+        if($contact->age === 2){
+            $age = '20歳〜29歳';
+        }
+        if($contact->age === 3){
+            $age = '30歳〜39歳';
+        }
+        if($contact->age === 4){
+            $age = '40歳〜49歳';
+        }
+        if($contact->age === 5){
+            $age = '50歳〜59歳';
+        }
+        if($contact->age === 6){
+            $age = '60歳〜69歳';
+        }
+
+        return view('contact.show', compact('contact', 'gender', 'age'));
     }
 
     /**
