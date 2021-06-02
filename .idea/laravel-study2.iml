@@ -113,6 +113,7 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/filp/whoops" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/opis/closure" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
