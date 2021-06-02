@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Models\ContactForm;
 
 class ContactFormController extends Controller
 {
@@ -31,11 +31,23 @@ class ContactFormController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $contact = new ContactForm;
+
+        $contact->your_name = $request->input('your_name');
+        $contact->title = $request->input('title');
+        $contact->email = $request->input('email');
+        $contact->url = $request->input('url');
+        $contact->gender = $request->input('gender');
+        $contact->age = $request->input('age');
+        $contact->contact = $request->input('contact');
+
+        $contact->save();
+
+        return redirect('contact/index');
     }
 
     /**
