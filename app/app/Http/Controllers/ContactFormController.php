@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ContactForm;
 use Illuminate\Support\Facades\DB;
+use App\Services\CheckFormData;
 
 class ContactFormController extends Controller
 {
@@ -40,7 +41,7 @@ class ContactFormController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
@@ -63,38 +64,15 @@ class ContactFormController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
         $contact = ContactForm::find($id);
 
-        if($contact->gender === 0){
-            $gender = '男性';
-        }
-
-        if($contact->gender === 1){
-            $gender = '女性';
-        }
-        if($contact->age === 1){
-            $age = '〜19歳';
-        }
-        if($contact->age === 2){
-            $age = '20歳〜29歳';
-        }
-        if($contact->age === 3){
-            $age = '30歳〜39歳';
-        }
-        if($contact->age === 4){
-            $age = '40歳〜49歳';
-        }
-        if($contact->age === 5){
-            $age = '50歳〜59歳';
-        }
-        if($contact->age === 6){
-            $age = '60歳〜69歳';
-        }
+        $gender = CheckFormData::checkGender($contact);
+        $age = CheckFormData::checkAge($contact);
 
         return view('contact.show', compact('contact', 'gender', 'age'));
     }
@@ -102,7 +80,7 @@ class ContactFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,8 +93,8 @@ class ContactFormController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
@@ -139,7 +117,7 @@ class ContactFormController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
