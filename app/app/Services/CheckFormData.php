@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-
-
 class CheckFormData
 {
     public static function checkGender($data){
